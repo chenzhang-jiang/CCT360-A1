@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WHO LIVES HERE?</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="game" class="game-shell">
+    <div class="grain"></div>
+
+    <section id="titleScreen" class="screen active title-screen">
+      <div class="title-backdrop"></div>
+      <div class="title-panel">
+        <p class="eyebrow">AN INTERACTIVE INVESTIGATION</p>
+        <h1>WHO LIVES HERE?</h1>
+        <p class="subtitle">Reconstruct a life from what was left behind.</p>
+        <div class="title-actions">
+          <button class="menu-btn primary" data-action="new-game">NEW INVESTIGATION</button>
+          <button class="menu-btn" data-action="continue">CONTINUE</button>
+          <button class="menu-btn" data-action="how-to">HOW TO PLAY</button>
+        </div>
+        <div class="title-meta"><span>11:47 PM</span><span>APARTMENT 407</span></div>
+      </div>
+    </section>
+
+    <section id="introScreen" class="screen intro-screen">
+      <div class="intro-copy">
+        <p>The apartment is quiet.</p>
+        <p>Someone clearly lives here.</p>
+        <p class="intro-question">But who?</p>
+        <button class="menu-btn primary" data-action="enter-apartment">BEGIN INVESTIGATION</button>
+      </div>
+    </section>
+
+    <section id="mainScreen" class="screen world-screen">
+      <header class="hud top-hud">
+        <button class="hud-btn" data-action="open-menu">☰</button>
+        <div class="hud-title"><span id="sceneLabel">LIVING ROOM</span><small id="clockText">11:47 PM</small></div>
+        <div class="evidence-count"><span id="clueCount">0</span>/7 EVIDENCE</div>
+      </header>
+
+      <main class="world" id="world">
+        <!-- LIVING ROOM -->
+        <section class="scene active" data-scene="living">
+          <div class="room room-living">
+            <div class="window night-window"><span class="moon"></span><span class="building b1"></span><span class="building b2"></span></div>
+            <div class="floor-rug"></div>
+            <div class="sofa"></div>
+            <div class="lamp standing-lamp"><span></span></div>
+            <div class="door roommate-door hotspot" data-hotspot="roommate" aria-label="Roommate door"><span class="hotspot-label">ROOMMATE'S DOOR</span></div>
+            <div class="door bedroom-door hotspot" data-hotspot="bedroom-door" aria-label="Bedroom door"><span class="hotspot-label">BEDROOM</span></div>
+            <div class="arch kitchen-arch hotspot" data-hotspot="kitchen" aria-label="Kitchen entrance"><span class="hotspot-label">KITCHEN</span></div>
+            <div class="bag backpack hotspot" data-hotspot="backpack" aria-label="Backpack"><span class="hotspot-label">BACKPACK</span></div>
+            <div class="ambient-copy">A lived-in room. Too quiet for this hour.</div>
+          </div>
+        </section>
+
+        <!-- KITCHEN -->
+        <section class="scene" data-scene="kitchen">
+          <div class="room room-kitchen">
+            <div class="kitchen-window"></div>
+            <div class="counter"></div>
+            <div class="fridge hotspot" data-hotspot="fridge"><span class="hotspot-label">FRIDGE</span><div class="fridge-note">buy groceries?</div></div>
+            <div class="cabinet hotspot" data-hotspot="cabinet"><span class="hotspot-label">CABINET</span></div>
+            <div class="mug hotspot" data-hotspot="mug"><span class="hotspot-label">MUG</span><span class="steam s1"></span><span class="steam s2"></span></div>
+            <div class="sink"></div>
+            <div class="ambient-copy">The hum of the fridge is louder than it should be.</div>
+          </div>
+        </section>
+
+        <!-- BEDROOM -->
+        <section class="scene" data-scene="bedroom">
+          <div class="room room-bedroom">
+            <div class="bed"><div class="pillow"></div><div class="blanket"></div></div>
+            <div class="desk-zone hotspot" data-hotspot="desk"><span class="hotspot-label">DESK</span></div>
+            <div class="wall-board hotspot" data-hotspot="wall"><span class="hotspot-label">WALL</span><div class="poster p1">TYPE</div><div class="poster p2">AGO</div><div class="poster p3">FRAME 04</div></div>
+            <div class="plant"></div>
+            <div class="shelf"></div>
+            <div class="ambient-copy">The room feels personal, but unfinished—as if its owner left in a hurry.</div>
+          </div>
+        </section>
+
+        <!-- DESK -->
+        <section class="scene" data-scene="desk">
+          <div class="room desk-closeup">
+            <div class="desktop-surface"></div>
+            <div class="planner hotspot" data-hotspot="planner"><span class="hotspot-label">PLANNER</span><div class="planner-lines">MON — Lecture<br>TUE — edit<br>WED — Studio<br>THU — Crit 2PM<br>FRI — Quiz</div></div>
+            <div class="sketchbook hotspot" data-hotspot="sketchbook"><span class="hotspot-label">SKETCHBOOK</span><span class="sketch-mark">Aa</span></div>
+            <div class="drawer hotspot" data-hotspot="drawer"><span class="hotspot-label">DRAWER</span></div>
+            <div class="laptop hotspot" data-hotspot="laptop"><span class="hotspot-label">LAPTOP</span><div class="laptop-screen">11:58 PM</div></div>
+            <div class="sticky hotspot" data-hotspot="sticky"><span class="hotspot-label">STICKY NOTE</span><span>the day this all ends</span></div>
+          </div>
+        </section>
+
+        <!-- LAPTOP -->
+        <section class="scene" data-scene="laptop">
+          <div class="computer-shell">
+            <div class="computer-topbar"><span>OWNER-MAC</span><span id="computerTime">12:01 AM</span></div>
+            <div class="desktop-icons">
+              <button class="desktop-icon" data-hotspot="folder-projects"><span>▣</span>PROJECTS</button>
+              <button class="desktop-icon locked" data-hotspot="folder-school"><span>▣</span>SCHOOL <em>LOCKED</em></button>
+              <button class="desktop-icon" data-hotspot="folder-photos"><span>▣</span>PHOTOS</button>
+              <button class="desktop-icon usb-icon hidden" id="usbIcon" data-hotspot="usb"><span>◫</span>USB DRIVE</button>
+            </div>
+            <div class="terminal-note" id="terminalNote">No external drive detected.</div>
+          </div>
+        </section>
+
+        <!-- DEDUCTION -->
+        <section class="scene" data-scene="deduction">
+          <div class="deduction-board">
+            <p class="eyebrow">FINAL DEDUCTION</p>
+            <h2>BUILD YOUR THEORY</h2>
+            <p class="deduction-sub">Use the evidence you collected. You can still return to the apartment.</p>
+            <div class="theory-grid">
+              <fieldset><legend>STATUS</legend>
+                <label><input type="radio" name="status" value="student"> University student</label>
+                <label><input type="radio" name="status" value="instructor"> University instructor</label>
+                <label><input type="radio" name="status" value="professional"> Full-time designer</label>
+              </fieldset>
+              <fieldset><legend>LOCATION</legend>
+                <label><input type="radio" name="location" value="utm"> UTM</label>
+                <label><input type="radio" name="location" value="ocad"> OCAD University</label>
+                <label><input type="radio" name="location" value="sheridan"> Sheridan College</label>
+              </fieldset>
+              <fieldset><legend>FIELD — CHOOSE TWO</legend>
+                <label><input type="checkbox" name="field" value="ccit"> Communication / Digital Media</label>
+                <label><input type="checkbox" name="field" value="fah"> Art & Art History</label>
+                <label><input type="checkbox" name="field" value="econ"> Economics</label>
+                <label><input type="checkbox" name="field" value="stats"> Statistics</label>
+                <label><input type="checkbox" name="field" value="math"> Mathematics</label>
+                <label><input type="checkbox" name="field" value="bio"> Biology</label>
+              </fieldset>
+            </div>
+            <div class="deduction-actions">
+              <button class="menu-btn" data-action="return-world">RETURN TO APARTMENT</button>
+              <button class="menu-btn primary" data-action="submit-theory">SUBMIT THEORY</button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="hud bottom-hud">
+        <button class="hud-btn" data-action="back-scene">← BACK</button>
+        <button class="hud-btn notebook-btn" data-action="open-notebook">N&nbsp;&nbsp;NOTEBOOK</button>
+        <button class="hud-btn final-btn locked" id="finalBtn" data-action="final-deduction">MAKE A DEDUCTION</button>
+      </footer>
+    </section>
+
+    <aside id="notebook" class="overlay notebook-overlay">
+      <div class="notebook-panel">
+        <div class="notebook-head"><div><p class="eyebrow">INVESTIGATION LOG</p><h2>NOTEBOOK</h2></div><button class="close-btn" data-action="close-overlay">×</button></div>
+        <div class="notebook-grid">
+          <nav id="clueList" class="clue-list"></nav>
+          <article id="clueDetail" class="clue-detail">
+            <div class="empty-note">Collected evidence will appear here.</div>
+          </article>
+        </div>
+      </div>
+    </aside>
+
+    <aside id="modal" class="overlay modal-overlay">
+      <div class="modal-card">
+        <button class="close-btn" data-action="close-overlay">×</button>
+        <div id="modalContent"></div>
+      </div>
+    </aside>
+
+    <aside id="menuOverlay" class="overlay menu-overlay">
+      <div class="pause-panel">
+        <p class="eyebrow">PAUSED</p><h2>INVESTIGATION MENU</h2>
+        <button class="menu-btn" data-action="close-overlay">CONTINUE</button>
+        <button class="menu-btn" data-action="open-notebook">NOTEBOOK</button>
+        <button class="menu-btn" data-action="reset-game">RESTART CASE</button>
+        <button class="menu-btn" data-action="title-screen">QUIT TO TITLE</button>
+      </div>
+    </aside>
+
+    <section id="endingScreen" class="screen ending-screen">
+      <div class="ending-card">
+        <p class="eyebrow" id="endingEyebrow">CASE CLOSED</p>
+        <h2 id="endingTitle">YOU FOUND THEM.</h2>
+        <p id="endingBody"></p>
+        <div class="ending-stats"><span id="endingClues">0/7 evidence</span><span id="endingTime">12:08 AM</span></div>
+        <button class="menu-btn primary" data-action="review-evidence">REVIEW EVIDENCE</button>
+        <button class="menu-btn" data-action="return-world">RETURN TO APARTMENT</button>
+        <button class="menu-btn" data-action="reset-game">PLAY AGAIN</button>
+      </div>
+    </section>
+
+    <div id="toast" class="toast"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
